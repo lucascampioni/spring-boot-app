@@ -1,13 +1,14 @@
+drop schema anotacao;
 create schema anotacao;
 
 use anotacao;
-
+drop user 'user'@'localhost';
 create user 'user'@'localhost' identified by 'pass123';
 
 grant select, insert, delete, update on anotacao.* to user@'localhost';
 
 create table usr_usuario (
-	user_id bigint unsigned not null auto_increment,
+	usr_id bigint unsigned not null auto_increment,
 	usr_nome varchar (20) not null,
 	usr_senha varchar (50) not null,
 	primary key (usr_id),
@@ -23,10 +24,9 @@ create table aut_autorizacao (
 
 create table uau_usuario_autorizacao(
 	usr_id bigint unsigned not null,
-	aut_id bigint unsignet not null,
+	aut_id bigint unsigned not null,
 	primary key (usr_id, aut_id),
-	foreign key aut_usuario_fk (usr_id) references usr_usuario (usr_nome),
-	foreign key aut_autorizacao_fk (aut_id) references aut_autorizacao (aut_nome)
-	
+	foreign key aut_usuario_fk (usr_id) references usr_usuario (usr_id),
+	foreign key aut_autorizacao_fk (aut_id) references aut_autorizacao (aut_id)
 )
 
