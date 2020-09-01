@@ -1,10 +1,16 @@
 package br.gov.sp.fatec.springbootapp.entity;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -21,6 +27,13 @@ public class Usuario {
 
     @Column(name = "usr_senha")
     private String senha;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "uau_usuario_autorizacao",
+    joinColumns = {@JoinColumn(name = "usr_id")},
+    inverseJoinColumns = {@JoinColumn(name = "aut_id")}
+    )
+    private Set<Autorizacao> autorizacoes;
 
     public Long getId() {
         return this.id;
@@ -47,5 +60,11 @@ public class Usuario {
         this.senha = senha;
     }
 
+    public Set<Autorizacao> getAutorizacoes() {
+        return this.autorizacoes;
+    }
 
+    public void setAutorizacoes(Set<Autorizacao> autorizacoes){
+        this.autorizacoes = autorizacoes;
+    }
 }

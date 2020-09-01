@@ -32,4 +32,9 @@ class SpringBootAppApplicationTests {
         assertNotNull(usuario.getId());
     }
 
+    @Test
+    void testaAutorizacao(){ 
+        Usuario usuario = usuarioRepo.findById(1L).get();
+        assertEquals("ROLE_ADMIN", usuario.getAutorizacoes().iterator().next().getNome());
+    }
 }
