@@ -1,8 +1,8 @@
-drop schema anotacao;
+
 create schema anotacao;
 
 use anotacao;
-drop user 'user'@'localhost';
+
 create user 'user'@'localhost' identified by 'pass123';
 
 grant select, insert, delete, update on anotacao.* to user@'localhost';
